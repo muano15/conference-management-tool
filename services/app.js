@@ -1,0 +1,15 @@
+const express = require('express')
+const cors = require('cors')
+const path = require('path')
+const pages_routes = require(path.join(path.dirname(__dirname), "/services/routes/pages_routes.js"))
+const common_routes = require(path.join(path.dirname(__dirname), "/services/routes/features_routes/common_routes.js"))
+const admin_routes = require(path.join(path.dirname(__dirname), "/services/routes/features_routes/admin_routes.js"))
+
+const app = express()
+app.use(cors({origin: "*"}))
+app.use(express.json())
+app.use(pages_routes)
+app.use(common_routes)
+app.use(admin_routes)
+
+app.listen(4040, () => { console.log("<--LISTING ON PORT 4040-->")})

@@ -1,0 +1,54 @@
+<div class="modal fade modal-lg" id="create_conference_modal" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+            </div>
+
+            <div class="modal-body" id="homeCreateConfModalBody">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="confname-addon1">Name</span>
+                    <input type="text" id="newConferenceName" class="form-control" placeholder="Conference name..." aria-label="Conferencename" aria-describedby="basic-addon1">
+                </div>
+
+                <div class="row justify-content-center text-center mt-3">
+                    <div class="col-5 form-check">
+                        <input class="form-check-input" type="radio" name="newConferenceType" id="newConferenceSB" value="single-blind">
+                        <label class="form-check-label" for="newConferenceSB">Single-blind</label>
+                    </div>
+
+                    <div class="col-5 form-check">
+                        <input class="form-check-input" type="radio" name="newConferenceType" id="newConferenceDB" value="double-blind">
+                        <label class="form-check-label" for="newConferenceDB">Double-blind</label>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mt-3">
+                    <div class="col-2">
+                        <button class="btn btn-primary mt-1" id="add_members_btn" data-bs-toggle="modal" data-bs-target="#add_members_modal">Add members</button>
+                    </div>
+
+                    <div class="col-10 d-flex justify-content-evenly col-8">
+                        <div class="col text-center bg-info">
+                            <h4>Organisers</h4>
+                            <h5 id="numOfOrganisers">0</h5>
+                        </div>
+                        <div class="col text-center bg-light">
+                            <h4>Areachair</h4>
+                            <h5 id="numOfAreachair">0</h5>
+                        </div>
+                        <div class="col text-center bg-success">
+                            <h4>Reviewer</h4>
+                            <h5 id="numOfReviewers">0</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeNewConference()">Close</button>
+                <button type="button" class="btn btn-secondary" id="create_conference_btn">Create conference</button>
+            </div>
+        </div>
+    </div>
+</div>

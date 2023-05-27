@@ -1,0 +1,61 @@
+<html lang="en">
+
+<%- include("./components/head.ejs") %>
+
+<body>
+
+<p class="text-info display-5 text-center">Conference Management Tool</p>
+<p class="text-secondary display-6 text-center">Sign Up</p>
+
+<form>
+    <div class="form-group">
+        <label for="signupUserName">UserName</label>
+        <input type="username" class="form-control" id="signupUserName" placeholder="e.g.Madambi">
+    </div>
+
+    <div class="form-group">
+        <label for="signupUserEmail">Email address</label>
+        <input type="email" class="form-control" id="signupUserEmail" aria-describedby="emailHelp" placeholder="Enter email">
+    </div>
+
+    <div class="form-group">
+        <label for="areaOfExpertiseModal">Area Of Expertise</label>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="selectExpertiseBtn" type="button" data-bs-toggle="modal" data-bs-target="#areaOfExpertiseModal">Click To Select</span>
+            <div id="chosenAreaOfExpertise">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="signupDomain">Domain</label>
+        <input type="Domain" class="form-control" id="signupDomain" placeholder="e.g.wits.ac.za">
+    </div>
+
+    <div class="form-group">
+        <label for="signupUserPword">Password</label>
+        <input type="password" class="form-control" id="signupUserPword" placeholder="Password">
+    </div>
+
+    <div class="form-group">
+        <label for="signupVerifyUserPword">Confirm Password</label>
+        <input type="password" class="form-control" id="signupVerifyUserPword" placeholder="Confirm Password">
+    </div>
+
+    <div class="d-grid gap-2">
+        <button class="btn btn-secondary" id="signupSubmitBtn" type="button">Submit</button>
+        <button class="btn btn-secondary" type="button" onclick="do_this()">other</button>
+    </div>
+</form>
+
+<div class="text-info lead text-center">Already have an account?
+    <button class="btn btn-secondary" disabled>Sign In</button>
+</div>
+
+<%- include("./components/expertise_modal.ejs") %>
+
+</body>
+
+
+</html>

@@ -1,0 +1,24 @@
+<template id="memberTemplate">
+    <div class="col">
+        ${jsonResponse[i].USER_NAME}
+    </div>
+    <div class="col">
+        ${jsonResponse[i].USER_EMAIL}
+    </div>
+    <div id="thisUserId" class="col">
+        ${jsonResponse[i].USER_ID}
+    </div>
+    <div>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group" role="group">
+                <i type="button" class="bi bi-plus-circle-fill h2" id="addMemberOptBtn" data-bs-toggle="dropdown" aria-expanded="false" ></i>
+                <ul class="dropdown-menu">
+                    <li><button class="btn" onclick="addToOrganisers(${jsonResponse[i].USER_ID})">Add to organisers</button></li>
+                    <li><button class="btn" onclick="addToAreachairs(${jsonResponse[i].USER_ID})">Add to areachairs</button></li>
+                    <li><button class="btn" onclick="addToReviewers(${jsonResponse[i].USER_ID})">Add to reviewers</button></li>
+                    <li><button class="btn" onclick="removeMember(${jsonResponse[i].USER_ID})">Remove member</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>

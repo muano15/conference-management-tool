@@ -1,3 +1,5 @@
+const serverIP = "10.0.11.198"
+
 const createConfBtn = document.querySelector("#create_conference_btn")
 if (createConfBtn)
 {
@@ -8,7 +10,6 @@ if (createConfBtn)
         let confAreachairs = JSON.parse(sessionStorage.getItem('areachairs'))
         let confReviewers = JSON.parse(sessionStorage.getItem('reviewers'))
         let modes = document.getElementsByName('newConferenceType')
-
         let confMode
         modes.forEach(radio => {
             if (radio.checked)
@@ -23,8 +24,7 @@ if (createConfBtn)
                 }
             }
         })
-
-        fetch("http://localhost:4040/features/admin/create_conference", {
+        fetch("http://" + serverIP + ":4040/features/admin/create_conference", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -44,40 +44,55 @@ if (createConfBtn)
         })
     })
 }
-
 const addMembersBtn = document.querySelector("#add_members_btn")
+const addMembersModal = document.querySelector("#add_members_modal")
 if (addMembersBtn)
 {
     addMembersBtn.addEventListener("click", () => {
-
-        fetch("http://localhost:4040/features/common/get_all_users", {
+        fetch("http://" + serverIP + ":4040/features/common/get_all_users", {
             method: "GET",
         }).then((response) => {
             if (response.status == 200) {
                 return response.json()
             }
         }).then((jsonResponse) => {
-
             if (sessionStorage.getItem('all_users') == null) {
                 var allUsers = jsonResponse
                 sessionStorage.setItem("all_users", JSON.stringify(allUsers))
             }
-
             if (sessionStorage.getItem('organisers') == null) {
-                console.log("in the sessionStorage loop")
                 sessionStorage.setItem("organisers", JSON.stringify([]))
                 sessionStorage.setItem("areachairs", JSON.stringify([]))
                 sessionStorage.setItem("reviewers", JSON.stringify([]))
             }
+            fillAddMembersModalBody(jsonResponse)
+        })
+    })
+}
+const memberSearchBar = document.querySelector("#memberSearchBar")
+if (memberSearchBar)
+{
+    memberSearchBar.addEventListener("input", e => {
+        const value = e.target.value.toLowerCase()
+        var allUsers = JSON.parse(sessionStorage.getItem('all_users'))
+        var filteredUsers = allUsers.filter((user) => {
+            return user.USER_NAME.toLowerCase().includes(value) || user.USER_EMAIL.toLowerCase().includes(value)
+        })
+        fillAddMembersModalBody(filteredUsers)
+    })
+}
+function fillAddMembersModalBody(jsonResponse)
+{
+    if (addMembersModal) {
+        var addMembersModalBody = document.getElementById('add_members_modal_body')
+        addMembersModalBody.innerHTML = ''
 
-            const addMembersModal = document.querySelector("#add_members_modal")
-            if (addMembersModal)
-            {
-                for (let i = 0; i < JSON.parse(sessionStorage.getItem("all_users")).length; i++) {
-                    var userElement = document.createElement('div');
-                    userElement.setAttribute('class', 'bg-info container d-flex border-bottom py-3 my-4');
+        for (let i = 0; i < JSON.parse(sessionStorage.getItem("all_users")).length; i++) {
 
-                    userElement.innerHTML = `
+            var userElement = document.createElement('div')
+            userElement.setAttribute('class', 'bg-info container d-flex border-bottom py-3 my-4');
+
+            userElement.innerHTML = `
                         <div class="col">
                             ${jsonResponse[i].USER_NAME}
                         </div>
@@ -100,23 +115,17 @@ if (addMembersBtn)
                                 </div>
                             </div>
                         </div>
-                    `;
+                    `
 
-                    var addMembersModalBody = document.getElementById('add_members_modal_body');
-
-                    addMembersModalBody.appendChild(userElement);
-                }
-            }
-        })
-    })
+            addMembersModalBody.appendChild(userElement)
+        }
+    }
 }
-
 function updateCount()
 {
     document.querySelector("#numOfOrganisers").innerHTML = JSON.parse(sessionStorage.getItem("organisers")).length
     document.querySelector("#numOfAreachair").innerHTML = JSON.parse(sessionStorage.getItem("areachairs")).length
     document.querySelector("#numOfReviewers").innerHTML = JSON.parse(sessionStorage.getItem("reviewers")).length
-    document.querySelector("#numOfAuthors").innerHTML = JSON.parse(sessionStorage.getItem("authors")).length
 }
 function addToOrganisers(userId)
 {
@@ -167,5 +176,11 @@ function closeNewConference()
         sessionStorage.removeItem("areachairs")
         sessionStorage.removeItem("reviewers")
         sessionStorage.removeItem("all_users")
+    }
+
+    if (addMembersModal) {
+        var addMembersModalBody = document.getElementById('add_members_modal_body')
+
+        addMembersModalBody.innerHTML = ''
     }
 }

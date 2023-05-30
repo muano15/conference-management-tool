@@ -2,7 +2,7 @@ const {createPool} = require("mysql");
 const e = require("express");
 
 const pool = createPool({
-    host: 'localhost',
+    host: '10.0.11.198',
     user: 'muano',
     password: 'password'
 })

@@ -13,10 +13,8 @@ router.get('/pages/signup/signup.js', (req, res) => {
 })
 
 router.get('/pages/home/home.ejs', (req, res) => {
-    fetch("http://localhost:4040/features/common/get_all_conferences", { method: "GET" })
-        .then((response) => {
-            return response.json()
-        })
+    fetch("http://10.0.11.198:4040/features/common/get_all_conferences", { method: "GET" })
+        .then((response) => { return response.json() })
         .then((jsonResponse) => {
             res.render(path.join(path.dirname(__dirname), "../pages/home/home.ejs"), {
                 all_conferences: jsonResponse,

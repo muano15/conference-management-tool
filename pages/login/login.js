@@ -1,7 +1,9 @@
+const serverIP = "10.0.11.198"
+
 const loginBtn = document.querySelector("#loginBtn")
 if (loginBtn) {
     loginBtn.addEventListener("click", () =>{
-        fetch("http://localhost:4040/features/common/login", {
+        fetch("http://" + serverIP + ":4040/features/common/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -12,7 +14,7 @@ if (loginBtn) {
             })
         }).then((response) => {
             if (response.status == 200) {
-                window.location.href = "http://localhost:4040/pages/home/home.ejs"
+                window.location.href = "http://" + serverIP + ":4040/pages/home/home.ejs"
             } else {
                 var statusElement = document.createElement('div')
                 statusElement.setAttribute('class', 'bg-danger text-center border-bottom p-1 m-1')
@@ -23,5 +25,12 @@ if (loginBtn) {
                 statusBox.appendChild(statusElement)
             }
         })
+    })
+}
+
+const signupBtn = document.querySelector("#signupBtn")
+if (signupBtn) {
+    signupBtn.addEventListener("click", () => {
+        window.location.href = "http://" + serverIP + ":4040/pages/signup/signup.ejs"
     })
 }

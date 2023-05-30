@@ -1,3 +1,6 @@
+const serverIP = "10.0.11.198"
+
+
 const signupSubmitBtn = document.querySelector("#signupSubmitBtn")
 if (signupSubmitBtn)
 {
@@ -5,7 +8,7 @@ if (signupSubmitBtn)
 
         var expertiseStr = JSON.parse(sessionStorage.getItem("areaOfExpertise")).join('!').toString()
 
-        fetch("http://localhost:4040/features/common/signup", {
+        fetch("http://" + serverIP + ":4040/features/common/signup", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -21,9 +24,16 @@ if (signupSubmitBtn)
 
             if (response.status == 200) {
 
-                window.location.href = "http://localhost:4040/pages/home/home.ejs"
+                window.location.href = "http://" + serverIP + ":4040/pages/home/home.ejs"
             }
         })
+    })
+}
+
+const loginBtn = document.querySelector("#loginBtn")
+if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+        window.location.href = "http://" + serverIP + ":4040/pages/login/login.ejs"
     })
 }
 

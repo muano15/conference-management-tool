@@ -35,4 +35,8 @@ router.get('/pages/login/login.js', (req, res) => {
     res.sendFile(path.join(path.dirname(__dirname), "../pages/login/login.js"))
 })
 
+router.get('/pages/common_components/server_ip_address.js', (req, res) => {
+    res.sendFile(path.join(path.dirname(__dirname), "../pages/common_components/server_ip_address.js"))
+})
+
 module.exports = router

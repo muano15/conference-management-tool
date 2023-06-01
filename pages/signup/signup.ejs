@@ -22,7 +22,7 @@
         <label for="areaOfExpertiseModal">Area Of Expertise</label>
         <div class="input-group flex-nowrap">
             <span class="input-group-text" id="selectExpertiseBtn" type="button" data-bs-toggle="modal" data-bs-target="#areaOfExpertiseModal">Click To Select</span>
-            <div id="chosenAreaOfExpertise">
+            <div id="chosenAreaOfExpertise" class="d-flex">
 
             </div>
         </div>
@@ -54,6 +54,53 @@
 </div>
 
 <%- include("./components/expertise_modal.ejs") %>
+
+<script>
+    function addExpertise(expertise)
+    {
+        var areaOfExpertise = JSON.parse(sessionStorage.getItem("areaOfExpertise"))
+        areaOfExpertise.push(expertise)
+        sessionStorage.setItem("areaOfExpertise", JSON.stringify(areaOfExpertise))
+
+        addExpertiseElements()
+    }
+
+    function addExpertiseElements()
+    {
+        var areaOfExpertise = JSON.parse(sessionStorage.getItem("areaOfExpertise"))
+        const chosenAreaOfExpertise = document.querySelector("#chosenAreaOfExpertise")
+        chosenAreaOfExpertise.innerHTML = ''
+
+        for (var expertise in areaOfExpertise) {
+            var expertiseDiv = document.createElement('div')
+            expertiseDiv.setAttribute("class", "mx-3")
+            expertiseDiv.setAttribute("onclick", "removeExpertise('" + areaOfExpertise[expertise] + "')")
+            expertiseDiv.innerHTML = areaOfExpertise[expertise]
+
+            chosenAreaOfExpertise.appendChild(expertiseDiv)
+        }
+    }
+
+    function removeExpertise(expertise)
+    {
+        var areaOfExpertise = JSON.parse(sessionStorage.getItem("areaOfExpertise"))
+        var newArray = []
+
+        var counter = 0;
+        for (var exp in areaOfExpertise) {
+            if (expertise != areaOfExpertise[exp])
+            {
+                newArray[counter] = areaOfExpertise[exp];
+                counter++
+            }
+        }
+
+        console.log(newArray)
+        sessionStorage.setItem("areaOfExpertise", JSON.stringify(newArray))
+
+        addExpertiseElements()
+    }
+</script>
 
 </body>
 

@@ -1,4 +1,5 @@
-const serverIP = "10.0.11.198"
+import server_ip_address from "../common_components/server_ip_address.js"
+console.log(server_ip_address)
 
 
 const signupSubmitBtn = document.querySelector("#signupSubmitBtn")
@@ -8,7 +9,7 @@ if (signupSubmitBtn)
 
         var expertiseStr = JSON.parse(sessionStorage.getItem("areaOfExpertise")).join('!').toString()
 
-        fetch("http://" + serverIP + ":4040/features/common/signup", {
+        fetch("http://" + server_ip_address + ":4040/features/common/signup", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +25,7 @@ if (signupSubmitBtn)
 
             if (response.status == 200) {
 
-                window.location.href = "http://" + serverIP + ":4040/pages/home/home.ejs"
+                window.location.href = "http://" + server_ip_address + ":4040/pages/home/home.ejs"
             }
         })
     })
@@ -33,7 +34,7 @@ if (signupSubmitBtn)
 const loginBtn = document.querySelector("#loginBtn")
 if (loginBtn) {
     loginBtn.addEventListener("click", () => {
-        window.location.href = "http://" + serverIP + ":4040/pages/login/login.ejs"
+        window.location.href = "http://" + server_ip_address + ":4040/pages/login/login.ejs"
     })
 }
 
@@ -46,13 +47,6 @@ if (selectExpertiseBtn)
                 sessionStorage.setItem("areaOfExpertise", JSON.stringify([]))
             }
     })
-}
-
-function addExpertise(expertise)
-{
-    var areaOfExpertise = JSON.parse(sessionStorage.getItem("areaOfExpertise"))
-    areaOfExpertise.push(expertise)
-    sessionStorage.setItem("areaOfExpertise", JSON.stringify(areaOfExpertise))
 }
 
 

@@ -1,9 +1,10 @@
-const serverIP = "10.0.11.198"
+import server_ip_address from "../common_components/server_ip_address.js"
+console.log(server_ip_address)
 
 const loginBtn = document.querySelector("#loginBtn")
 if (loginBtn) {
     loginBtn.addEventListener("click", () =>{
-        fetch("http://" + serverIP + ":4040/features/common/login", {
+        fetch("http://" + server_ip_address + ":4040/features/common/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -14,7 +15,7 @@ if (loginBtn) {
             })
         }).then((response) => {
             if (response.status == 200) {
-                window.location.href = "http://" + serverIP + ":4040/pages/home/home.ejs"
+                window.location.href = "http://" + server_ip_address + ":4040/pages/home/home.ejs"
             } else {
                 var statusElement = document.createElement('div')
                 statusElement.setAttribute('class', 'bg-danger text-center border-bottom p-1 m-1')
@@ -31,6 +32,6 @@ if (loginBtn) {
 const signupBtn = document.querySelector("#signupBtn")
 if (signupBtn) {
     signupBtn.addEventListener("click", () => {
-        window.location.href = "http://" + serverIP + ":4040/pages/signup/signup.ejs"
+        window.location.href = "http://" + server_ip_address + ":4040/pages/signup/signup.ejs"
     })
 }

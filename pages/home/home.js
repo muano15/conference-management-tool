@@ -1,4 +1,6 @@
-const serverIP = "10.0.11.198"
+import server_ip_address from "../common_components/server_ip_address.js"
+console.log(server_ip_address)
+
 
 const createConfBtn = document.querySelector("#create_conference_btn")
 if (createConfBtn)
@@ -24,7 +26,7 @@ if (createConfBtn)
                 }
             }
         })
-        fetch("http://" + serverIP + ":4040/features/admin/create_conference", {
+        fetch("http://" + server_ip_address + ":4040/features/admin/create_conference", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +51,7 @@ const addMembersModal = document.querySelector("#add_members_modal")
 if (addMembersBtn)
 {
     addMembersBtn.addEventListener("click", () => {
-        fetch("http://" + serverIP + ":4040/features/common/get_all_users", {
+        fetch("http://" + server_ip_address + ":4040/features/common/get_all_users", {
             method: "GET",
         }).then((response) => {
             if (response.status == 200) {
